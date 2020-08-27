@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "../axios";
 import requests from "../requests";
 import "./Header.css";
+import db from "../firebase";
 
 function Header() {
   const [movie, setMovie] = useState([]);
-  const [myList, setMyList] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -20,9 +20,16 @@ function Header() {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
   }
 
-  function addMovie(newMovie) {
-    setMyList({ myList: [...myList, newMovie] });
-  }
+  const addToList = movie => {
+    db.collection("MyList").add({
+      name: movie?.title || movie?.name || movie?.original_name,
+      overview: movie.overview,
+      posterPath: movie.poster_path,
+      releaseDate: movie.release_date ? movie.release_date : "",
+      firstAirDate: movie.first_air_date ? movie.first_air_date : "",
+      user: "Richard G"
+    });
+  };
 
   return (
     <header
@@ -38,8 +45,8 @@ function Header() {
         {/* opional chaing not working in vs code - read more around it */}
         <div className="banner__buttons">
           <button className="banner__button">Play</button>
-          <button className="banner__button" onClick={() => addMovie(movie)}>
-            My List
+          <button className="banner__button" onClick={() => addToList(movie)}>
+            Add To List
           </button>
         </div>
         <div className="banner__description">

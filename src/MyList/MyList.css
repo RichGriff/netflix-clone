@@ -9,12 +9,6 @@
   padding: 20px;
 }
 
-.myList__posterContainer {
-  width: 100%;
-  align-items: center;
-  flex-direction: column;
-}
-
 .myList__posters::-webkit-scrollbar {
   display: none;
 }

@@ -21,16 +21,6 @@ function Row({ title, fetchUrl, isLargeRow }) {
     fetchData();
   }, [fetchUrl]);
 
-  // const opts = {
-  //   height: "390",
-  //   width: "100%",
-  //   playerVars: {
-  //     autoplay: 1
-  //   }
-  // };
-
-  console.log("MOVIES", movies);
-
   const handleClick = movie => {
     if (movieInfo) {
       setMovieInfo("");
