@@ -1,0 +1,53 @@
+.movieInfo {
+  padding: 20px;
+  height: 190px;
+  margin-bottom: 3rem;
+}
+
+.movieInfo__description {
+  width: 100%;
+  line-height: 1.3;
+  padding-top: 1rem;
+  font-size: 1rem;
+  max-width: 80vw;
+  margin-bottom: 1.2rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .movieInfo__description {
+    max-width: 100vw;
+    margin-bottom: 6rem;
+  }
+  .movieInfo {
+    margin-bottom: 5rem;
+  }
+}
+
+.movieInfo__releaseDate {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+}
+
+.movieInfo__releaseDate > .MuiSvgIcon-root {
+  margin-right: 1rem;
+}
+
+.movieInfo__button {
+  cursor: pointer;
+  color: #fff;
+  outline: none;
+  border: none;
+  font-weight: 700;
+  border-radius: 0.2vw;
+  padding: 0.5rem 2rem;
+  margin-right: 1rem;
+  background-color: rgba(51, 51, 51, 0.5);
+}
+
+.movieInfo__button:hover {
+  color: #000;
+  background-color: #e6e6e6;
+  transition: all 0.2s;
+}

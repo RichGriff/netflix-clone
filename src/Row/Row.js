@@ -2,6 +2,7 @@ import React, { useEffect, useState, useImperativeHandle } from "react";
 import axios from "../axios";
 import Youtube from "react-youtube";
 import movieTrailer from "movie-trailer";
+import MovieInfo from "./MovieInfo";
 import "./Row.css";
 
 const base_url = "http://image.tmdb.org/t/p/original";
@@ -9,6 +10,7 @@ const base_url = "http://image.tmdb.org/t/p/original";
 function Row({ title, fetchUrl, isLargeRow }) {
   const [movies, setMovies] = useState([]);
   const [trailer, setTrailer] = useState("");
+  const [movieInfo, setMovieInfo] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -19,6 +21,8 @@ function Row({ title, fetchUrl, isLargeRow }) {
     fetchData();
   }, [fetchUrl]);
 
+  console.log(movies);
+
   const opts = {
     height: "390",
     width: "100%",
@@ -27,16 +31,24 @@ function Row({ title, fetchUrl, isLargeRow }) {
     }
   };
 
+  // const handleClick = movie => {
+  //   if (trailer) {
+  //     setTrailer("");
+  //   } else {
+  //     movieTrailer(movie?.name || movie?.title || "")
+  //       .then(url => {
+  //         const urlParams = new URLSearchParams(new URL(url).search);
+  //         setTrailer(urlParams.get("v"));
+  //       })
+  //       .catch(error => console.log(error));
+  //   }
+  // };
+
   const handleClick = movie => {
-    if (trailer) {
-      setTrailer("");
+    if (movieInfo) {
+      setMovieInfo("");
     } else {
-      movieTrailer(movie?.name || movie?.title || "")
-        .then(url => {
-          const urlParams = new URLSearchParams(new URL(url).search);
-          setTrailer(urlParams.get("v"));
-        })
-        .catch(error => console.log(error));
+      setMovieInfo(movie);
     }
   };
 
@@ -45,11 +57,16 @@ function Row({ title, fetchUrl, isLargeRow }) {
       <h2>{title}</h2>
       <div className="row__posters">
         {movies.map(movie => (
-          <img key={movie.id} onClick={() => handleClick(movie)} className={`row__poster ${isLargeRow && "row__posterLarge"}`} src={`${base_url}${isLargeRow ? movie?.poster_path : movie?.backdrop_path}`} alt={movie.name} />
+          <div className="row__posterContainer">
+            <img key={movie.id} onClick={() => handleClick(movie)} className={`row__poster ${isLargeRow && "row__posterLarge"}`} src={`${base_url}${isLargeRow ? movie?.poster_path : movie?.backdrop_path}`} alt={movie.name} />
+            {!isLargeRow && <p className="row__posterInfo">{movie?.title || movie?.name || movie?.original_name}</p>}
+          </div>
         ))}
       </div>
       {/* Youtube / Trailer videos */}
-      {trailer && <Youtube videoId={trailer} opts={opts} />}
+      {/* {trailer && <Youtube videoId={trailer} opts={opts} />} */}
+      {/* More Info Section */}
+      {movieInfo && <MovieInfo movie={movieInfo} />}
     </div>
   );
 }

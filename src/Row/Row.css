@@ -9,12 +9,18 @@
   padding: 20px;
 }
 
+.row__posterContainer {
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+}
+
 .row__posters::-webkit-scrollbar {
   display: none;
 }
 
 .row__poster {
-  width: 100%;
+  /* width: 100%; */
   object-fit: contain;
   max-height: 100px;
   transition: transform 450ms;
@@ -23,6 +29,12 @@
 
 .row__poster:hover {
   transform: scale(1.08);
+  cursor: pointer;
+}
+
+.row__posterContainer:hover .row__posterInfo {
+  /* display: inline;
+  text-align: center; */
 }
 
 .row__posterLarge {
@@ -31,4 +43,11 @@
 
 .row__posterLarge:hover {
   transform: scale(1.09);
+}
+
+.row__posterInfo {
+  text-align: center;
+  margin: 0.3rem auto;
+  font-size: 0.8rem;
+  display: none;
 }
