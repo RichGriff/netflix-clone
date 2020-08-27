@@ -5,29 +5,16 @@ import requests from "./requests";
 import Nav from "./Nav/Nav";
 import Header from "./Header/Header";
 import Row from "./Row/Row";
-import db from "./firebase";
+import MyList from "./MyList/MyList";
 
 function App() {
-  const [movieList, setMovieList] = useState([]);
-
-  useEffect(() => {
-    db.collection("MyList").onSnapshot(snapshot =>
-      setMovieList(
-        snapshot.docs.map(doc => ({
-          id: doc.id,
-          name: doc.data().name
-        }))
-      )
-    );
-  }, []);
-
-  console.log("My Movies >>>>>>>", movieList);
-
   return (
     <div className="app">
       <Nav />
       <Header />
       <Row title="Netflix Originals" fetchUrl={requests.fetchNetflixOriginals} isLargeRow />
+      {/* TODO: Only show MY LIST this when user logged in */}
+      <MyList />
       <Row title="Trending Now" fetchUrl={requests.fetchTrending} />
       <Row title="Top Rated" fetchUrl={requests.fetchTrending} />
       <Row title="Action Movies" fetchUrl={requests.fetchActionMovies} />

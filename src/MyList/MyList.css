@@ -1,0 +1,53 @@
+.myList {
+  margin-left: 20px;
+}
+
+.myList__posters {
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  padding: 20px;
+}
+
+.myList__posterContainer {
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+}
+
+.myList__posters::-webkit-scrollbar {
+  display: none;
+}
+
+.myList__poster {
+  /* width: 100%; */
+  object-fit: contain;
+  max-height: 100px;
+  transition: transform 450ms;
+  margin-right: 10px;
+}
+
+.myList__poster:hover {
+  transform: scale(1.08);
+  cursor: pointer;
+}
+
+.myList__posterContainer:hover .myList__posterInfo {
+  /* display: inline;
+  text-align: center; */
+}
+
+.myList__posterLarge {
+  max-height: 250px;
+}
+
+.myList__posterLarge:hover {
+  transform: scale(1.09);
+}
+
+.myList__posterInfo {
+  text-align: center;
+  margin: 0.3rem auto;
+  font-size: 0.8rem;
+  display: none;
+}
