@@ -4,7 +4,6 @@ import Youtube from "react-youtube";
 import movieTrailer from "movie-trailer";
 import MovieInfo from "./MovieInfo";
 import "./Row.css";
-
 const base_url = "http://image.tmdb.org/t/p/original";
 
 function Row({ title, fetchUrl, isLargeRow }) {

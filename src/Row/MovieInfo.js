@@ -3,7 +3,7 @@ import EventIcon from "@material-ui/icons/Event";
 import "./MovieInfo.css";
 import db from "../firebase";
 
-function MovieInfo({ movie }) {
+function MovieInfo({ movie, isMyList }) {
   const addToList = movie => {
     db.collection("MyList").add({
       name: movie?.title || movie?.name || movie?.original_name,
@@ -15,6 +15,10 @@ function MovieInfo({ movie }) {
     });
   };
 
+  const removeFromList = movie => {
+    db.collection("MyList").doc(movie.id).delete();
+  };
+
   return (
     <div className="movieInfo">
       <h1 className="movieInfo__title">{movie?.title || movie?.name || movie?.original_name}</h1>
@@ -24,9 +28,17 @@ function MovieInfo({ movie }) {
       </div>
       <p className="movieInfo__description">{movie.overview}</p>
       <button className="movieInfo__button">Trailer</button>
-      <button className="movieInfo__button" onClick={() => addToList(movie)}>
-        Add To List
-      </button>
+
+      {isMyList ? (
+        <button className="movieInfo__button" onClick={() => removeFromList(movie)}>
+          Remove
+        </button>
+      ) : (
+        <button className="movieInfo__button" onClick={() => addToList(movie)}>
+          Add To List
+        </button>
+      )}
+
       {/* Image? */}
     </div>
   );

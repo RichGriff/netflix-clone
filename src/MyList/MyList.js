@@ -40,7 +40,7 @@ function MyList() {
           <img key={movie.id} onClick={() => handleClick(movie)} className={"myList__poster myList__posterLarge"} src={`${base_url}${movie?.posterPath}`} alt={movie.name} />
         ))}
       </div>
-      {movieInfo && <MovieInfo movie={movieInfo} />}
+      {movieInfo && <MovieInfo movie={movieInfo} setMovieInfo isMyList />}
     </div>
   );
 }
