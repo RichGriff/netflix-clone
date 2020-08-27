@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import requests from "./requests";
 
 import Nav from "./Nav/Nav";
 import Header from "./Header/Header";
 import Row from "./Row/Row";
+import db from "./firebase";
 
 function App() {
+  const [movieList, setMovieList] = useState([]);
+
+  useEffect(() => {
+    db.collection("MyList").onSnapshot(snapshot =>
+      setMovieList(
+        snapshot.docs.map(doc => ({
+          id: doc.id,
+          name: doc.data().name
+        }))
+      )
+    );
+  }, []);
+
+  console.log("My Movies >>>>>>>", movieList);
+
   return (
     <div className="app">
       <Nav />

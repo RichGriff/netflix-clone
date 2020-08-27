@@ -5,6 +5,7 @@ import "./Header.css";
 
 function Header() {
   const [movie, setMovie] = useState([]);
+  const [myList, setMyList] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -17,6 +18,10 @@ function Header() {
 
   function truncate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
+  }
+
+  function addMovie(newMovie) {
+    setMyList({ myList: [...myList, newMovie] });
   }
 
   return (
@@ -33,7 +38,9 @@ function Header() {
         {/* opional chaing not working in vs code - read more around it */}
         <div className="banner__buttons">
           <button className="banner__button">Play</button>
-          <button className="banner__button">My List</button>
+          <button className="banner__button" onClick={() => addMovie(movie)}>
+            My List
+          </button>
         </div>
         <div className="banner__description">
           <p>{truncate(movie?.overview, 250)}</p>
