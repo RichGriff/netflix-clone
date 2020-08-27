@@ -18,12 +18,18 @@
 }
 
 .banner__description {
-  width: 45rem;
+  width: 100%;
   line-height: 1.3;
   padding-top: 1rem;
   font-size: 1rem;
-  max-width: 40vw;
+  max-width: 50vw;
   height: 80px;
+}
+
+@media only screen and (max-width: 600px) {
+  .banner__description {
+    max-width: 80vw;
+  }
 }
 
 .banner__button {
